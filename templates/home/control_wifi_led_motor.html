@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static i18n%}
+{% block content %}
+	<div id="app">
+    <div class="row mb-3">
+      <div class="col-6 pt-2">
+        {% trans "Arduino's IP: " %}<span>[[ dominio ]]</span>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-info"
+        @click="setIP">
+          {% trans "Set the Arduino's IP" %}
+        </button>
+      </div>
+    </div>
+    <hr>
+    <div class="row" v-show="error">
+      <span class="text-danger" style="font-size: 0.8em">
+        [[ message_error ]]
+      </span> 
+    </div>
+    <div class="row mt-3">
+      <div class="col-6 col-md-2">
+        <p class="text-center">
+          <img v-show="img_led" src="{% static 'images/light-on.png' %}" style="height: 120px">
+          <img v-show="!img_led" src="{% static 'images/light-off.png' %}" style="height: 120px">
+        </p>
+        <button class="btn btn-block btn-success" @click="sendRequest('ON')">LED ON</button>           
+    	  <button class="btn btn-block btn-secondary" @click="sendRequest('OFF')">LED OFF</button>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-center">
+          <img v-show="img_fan" src="{% static 'images/fan-on.png' %}" style="height: 120px">
+          <img v-show="!img_fan" src="{% static 'images/fan-off.png' %}" style="height: 120px">
+        </p>
+        <button class="btn btn-block btn-success" @click="sendRequest('FON')">FAN ON</button>           
+        <button class="btn btn-block btn-secondary" @click="sendRequest('FOFF')">FAN OFF</button>
+      </div>
+    </div>
+	</div>
+
+{% endblock content %}
+
+{% block extra_js %}
+	{% if debug %}
+    <script src="https://unpkg.com/vue"></script>
+    {% else %}
+    <script src="https://vuejs.org/js/vue.min.js"></script>
+    {% endif %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/control_wifi_led_motor.js' %}"></script>
+{% endblock extra_js %}

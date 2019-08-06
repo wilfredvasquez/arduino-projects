@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static i18n%}
+
+{% block content %}
+	<div id="app">
+    <div class="row">
+      <h3>{% trans "List of Projects with Arduino" %}</h3>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" width="10%">#</th>
+            <th scope="col" width="80%">{% trans "Project name" %}</th>
+            <th scope="col" width="10%">{% trans "Doc" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td><a href="{% url 'arduino_control_wifi_led_motor' %}">{% trans "LED and motor control through website" %}</a></td>
+            <td><a href="#"><i class="fas fa-file-alt"></i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+	</div>
+
+{% endblock content %}
